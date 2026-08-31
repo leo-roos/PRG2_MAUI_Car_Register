@@ -67,7 +67,13 @@
         public string Model
         {
             get { return model; }
-            set { this.model = value; }
+            set {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("En bil modell måste bestå av bokstäver, det kan inte vara tomt.");
+                }
+                this.model = value;
+            }
         }
 
         //TODO Modell ska valideras, sparas i objektet och visas i UI
