@@ -111,6 +111,17 @@ namespace PRG_MAUI_Car_Register
                     throw new ArgumentException("Årsmodell måste ha ett värde, det kan inte vara tomt.");
                 }
 
+                bool isValid = Regex.IsMatch(stringValue, "^[1-2][0-9][0-9][0-9]$");
+                if (!isValid)
+                {
+                    throw new ArgumentException("Årsmodell måste vara ett fyrsiffrigt år.");
+                }
+
+                if (value < 1895 || value > DateTime.Now.Year)
+                {
+                    throw new ArgumentException($"Årsmodell måste vara högre än 1895 och lägre än {DateTime.Now.Year}");
+                }
+
                 this.yearModel = stringValue;
             }
         }
