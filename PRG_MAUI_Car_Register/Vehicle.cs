@@ -24,37 +24,24 @@ namespace PRG_MAUI_Car_Register
         public string RegistrationNumber
         {
             get { return registrationNumber; }
-
             set
             {
-                if (!String.IsNullOrWhiteSpace(value))
-                {
-                    if (value.Length == 6)
-                    {
-                        for (int i = 0; i < 3; i++)
-                        {
-                            if (!char.IsLetter(value[i]))
-                                throw new ArgumentException("Inkorrekt registreringsnummer: De första tre tecknen måste vara bokstäver.");
-                        }
-
-                        for (int i = 3; i < 6; i++)
-                        {
-                            if (i < 5)
-                            {
-                                if (!char.IsDigit(value[i]))
-                                    throw new ArgumentException("Inkorrekt registreringsnummer: Det fjärde och femte tecknet måste vara siffror.");
-                            }
-                            else
-                            {
-                                if (!char.IsDigit(value[i]) && !char.IsLetter(value[i]))
-                                    throw new ArgumentException("Inkorrekt registreringsnummer: Det sjätte tecknet måste vara en siffra eller en bokstav.");
-                            }
-                        }
-                    }
-                }
-                else
+                if (String.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("Ett registreringsnummer måste bestå av exakt 6 tecken, med tre bokstäver följt av två siffror och en siffra eller bokstav.");
+                }
+
+                if (value.Length != 6)
+                {
+                    throw new ArgumentException("Ett registreringsnummer måste bestå av exakt 6 tecken, med tre bokstäver följt av två siffror och en siffra eller bokstav.");
+                }
+
+                bool isValid = Regex.IsMatch(value, "^[A-ZÅÄÖ]{3}[0-9]{2}[0-9]|[A-ZÅÄÖ]$");
+                Debug.WriteLine(isValid);
+
+                if (!isValid)
+                {
+                    throw new ArgumentException("Fel format, formattering måste vara antingen: ABC123, eller: ABC12D");
                 }
 
                 registrationNumber = value.ToUpper();
