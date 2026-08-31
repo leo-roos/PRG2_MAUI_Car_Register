@@ -98,6 +98,14 @@ namespace PRG_MAUI_Car_Register
                 {
                     throw new ArgumentException("En bils märke måste bestå av bokstäver, det kan inte vara tomt.");
                 }
+
+                foreach (char c in value)
+                {
+                    if (!char.IsLetterOrDigit(c) && c != ' ' && c != '-')
+                    {
+                        throw new ArgumentException("Märke får endast innehålla bokstäver, siffror, mellanslag och bindestreck.");
+                    }
+                }
                 this.manufacturer = value;
             }
         }
