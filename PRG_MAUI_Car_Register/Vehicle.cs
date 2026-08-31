@@ -80,7 +80,13 @@
         public string Manufacturer
         {
             get { return manufacturer; }
-            set { this.manufacturer = value; }
+            set {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("En bils märke måste bestå av bokstäver, det kan inte vara tomt.");
+                }
+                this.manufacturer = value;
+            }
         }
 
         //TODO Lägg till möjligheten att spara realistisk årsmodell, validera, spara och visa i objektet och visas i UI. Tips: Regex.IsMatch()
