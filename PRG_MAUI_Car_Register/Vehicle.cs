@@ -1,4 +1,8 @@
-﻿namespace PRG_MAUI_Car_Register
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
+
+namespace PRG_MAUI_Car_Register
 {
     class Vehicle
     {
@@ -8,7 +12,7 @@
         private string registrationNumber = string.Empty;
         private string manufacturer = string.Empty;
         private string model = string.Empty;
-        private int? yearModel = null;
+        private string yearModel = string.Empty;
 
         // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
         public Vehicle(Type vehicleType) // en konstruktor kan, men måste inte, ta parametrar
@@ -92,8 +96,23 @@
 
         public int YearModel
         {
-            get { return yearModel ?? 0; }
-            set { this.yearModel = value; }
+            get
+            {
+                if (int.TryParse(this.yearModel, out int result))
+                    return result;
+                return 0; // or throw new InvalidOperationException("YearModel not set or invalid");
+            }
+            set
+            {
+                string stringValue = value.ToString();
+
+                if (string.IsNullOrWhiteSpace(stringValue))
+                {
+                    throw new ArgumentException("Årsmodell måste ha ett värde, det kan inte vara tomt.");
+                }
+
+                this.yearModel = stringValue;
+            }
         }
 
         //TODO Lägg till möjligheten att spara realistisk årsmodell, validera, spara och visa i objektet och visas i UI. Tips: Regex.IsMatch()
