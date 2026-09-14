@@ -6,22 +6,23 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10">
             <Image Source="car.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
-            
-            <HorizontalStackLayout Spacing="20" HorizontalOptions="StartAndExpand">
-                <Entry x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" />
-                <Label Text="Välj typ:" VerticalOptions="Center"/>
-                <Picker x:Name="pickerType" TextColor="DarkRed">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Bil</x:String>
-                        <x:String>MC</x:String>
-                        <x:String>Lastbil</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-            </HorizontalStackLayout>
-            <Entry x:Name="entryManufacturer" Placeholder="Tillverkare" />
-            <Entry x:Name="entryModel" Placeholder="Modell" />
+
+            <Grid ColumnDefinitions="*, 0.2*, Auto, 0.5*" ColumnSpacing="5">
+                <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
+                <Label Grid.Column="2" Text="Välj typ:" VerticalOptions="Center"/>
+                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Bil</x:String>
+                            <x:String>MC</x:String>
+                            <x:String>Lastbil</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </Grid>
+            <Entry x:Name="entryManufacturer" Placeholder="Tillverkare" ReturnType="Next" />
+            <Entry x:Name="entryModel" Placeholder="Modell" ReturnType="Next" />
+            <Entry x:Name="entryYearModel" Placeholder="Årsmodell" Keyboard="Numeric" Completed="OnRegisterClicked" ReturnType="Done" />
             <Button x:Name="buttonRegister" Text="Registrera" Clicked="OnRegisterClicked" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
 
             <Label Text="Kategori:" FontAttributes="Bold" />
@@ -35,7 +36,7 @@
             <ListView x:Name="listViewVehicles" Margin="0,0,0,20"/>
 
             <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="20">
-                <Entry x:Name="entrySearchRegistrationNumber" HorizontalOptions="FillAndExpand" Placeholder="Sök på registreringsnummer"></Entry>
+                <Entry x:Name="entrySearchRegistrationNumber" HorizontalOptions="FillAndExpand" Placeholder="Sök på registreringsnummer" TextTransform="Uppercase" Completed="OnSearchClicked"></Entry>
                 <Button x:Name="buttonSearch" Text="Sök" HorizontalOptions="End" BackgroundColor="DarkRed" TextColor="White" Clicked="OnSearchClicked"/>
             </HorizontalStackLayout>
             <Label x:Name="labelSearchResult" Text="Sökresultat visas här..." TextColor="DarkRed" Margin="0,20,0,0"/>

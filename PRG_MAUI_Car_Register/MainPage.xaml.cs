@@ -8,17 +8,30 @@
         {
             InitializeComponent();
             pickerType.SelectedIndex = 0;
+
+            //Vehicle vehicle = new Vehicle((Vehicle.Type)(0));
+            //vehicle.RegistrationNumber = "ABC 123";
+            //vehicle.Manufacturer = "BMW";
+            //vehicle.Model = "M4-325";
+            //vehicle.YearModel = 2024;
         }
 
         private void OnRegisterClicked(object sender, EventArgs e)
         {
+            int YearModel = 0;
+            if (!int.TryParse(entryYearModel.Text, out YearModel))
+            {
+                throw new ArgumentNullException("Årsmodell måste anges i enbart siffror.");
+            }
+
             try
             {
                 Vehicle vehicle = new Vehicle((Vehicle.Type)pickerType.SelectedIndex);
 
-                vehicle.RegistrationNumber = entryRegistrationNumber.Text; ;
+                vehicle.RegistrationNumber = entryRegistrationNumber.Text;
                 vehicle.Manufacturer = entryManufacturer.Text;
                 vehicle.Model = entryModel.Text;
+                vehicle.YearModel = YearModel;
 
                 vehicleList.Add(vehicle);
                 listViewVehicles.ItemsSource = null;
@@ -93,6 +106,7 @@
             entryRegistrationNumber.Text = string.Empty;
             entryManufacturer.Text = string.Empty;
             entryModel.Text = string.Empty;
+            entryYearModel.Text = string.Empty;
         }
     }
 }
