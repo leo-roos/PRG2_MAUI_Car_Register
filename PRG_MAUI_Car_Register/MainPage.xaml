@@ -8,7 +8,7 @@
             <Image Source="car.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
 
             <Grid ColumnDefinitions="*, 0.2*, Auto, 0.5*" ColumnSpacing="5">
-                <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" TextTransform="Uppercase" />
+                <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
                 <Label Grid.Column="2" Text="Välj typ:" VerticalOptions="Center"/>
                 <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed">
                     <Picker.ItemsSource>
@@ -20,9 +20,9 @@
                     </Picker.ItemsSource>
                 </Picker>
             </Grid>
-            <Entry x:Name="entryManufacturer" Placeholder="Tillverkare" />
-            <Entry x:Name="entryModel" Placeholder="Modell" />
-            <Entry x:Name="entryYearModel" Placeholder="Årsmodell" Keyboard="Numeric" Completed="OnRegisterClicked" />
+            <Entry x:Name="entryManufacturer" Placeholder="Tillverkare" ReturnType="Next" />
+            <Entry x:Name="entryModel" Placeholder="Modell" ReturnType="Next" />
+            <Entry x:Name="entryYearModel" Placeholder="Årsmodell" Keyboard="Numeric" Completed="OnRegisterClicked" ReturnType="Done" />
             <Button x:Name="buttonRegister" Text="Registrera" Clicked="OnRegisterClicked" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
 
             <Label Text="Kategori:" FontAttributes="Bold" />
