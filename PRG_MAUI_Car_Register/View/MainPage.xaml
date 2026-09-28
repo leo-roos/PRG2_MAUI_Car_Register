@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PRG_MAUI_Car_Register.MainPage">
+             x:Class="PRG_MAUI_Car_Register.View.MainPage">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="10">
@@ -10,7 +10,7 @@
             <Grid ColumnDefinitions="*, 0.2*, Auto, 0.5*" ColumnSpacing="5">
                 <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
                 <Label Grid.Column="2" Text="Välj typ:" VerticalOptions="Center"/>
-                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed">
+                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed" SelectedIndexChanged="pickerType_SelectedIndexChanged">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Bil</x:String>

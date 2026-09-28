@@ -1,8 +1,11 @@
-﻿namespace PRG_MAUI_Car_Register
+﻿using PRG_MAUI_Car_Register.Model;
+using System.Collections.ObjectModel;
+
+namespace PRG_MAUI_Car_Register.View
 {
     public partial class MainPage : ContentPage
     {
-        List<Vehicle> vehicleList = new List<Vehicle>();
+        ObservableCollection<Vehicle> vehicleList = new ObservableCollection<Vehicle>();
 
         public MainPage()
         {
@@ -16,22 +19,27 @@
             //vehicle.YearModel = 2024;
         }
 
+        private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void OnRegisterClicked(object sender, EventArgs e)
         {
-            int YearModel = 0;
-            if (!int.TryParse(entryYearModel.Text, out YearModel))
-            {
-                throw new ArgumentNullException("Årsmodell måste anges i enbart siffror.");
-            }
+            //int YearModel = 0;
+            //if (!int.TryParse(entryYearModel.Text, out YearModel))
+            //{
+            //    throw new ArgumentNullException("Årsmodell måste anges i enbart siffror.");
+            //}
 
             try
             {
-                Vehicle vehicle = new Vehicle((Vehicle.Type)pickerType.SelectedIndex);
+                Car vehicle = new Car(pickerType.SelectedItem.ToString(), entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, entryYearModel.Text, 5);
 
-                vehicle.RegistrationNumber = entryRegistrationNumber.Text;
-                vehicle.Manufacturer = entryManufacturer.Text;
-                vehicle.Model = entryModel.Text;
-                vehicle.YearModel = YearModel;
+                //vehicle.RegistrationNumber = entryRegistrationNumber.Text;
+                //vehicle.Manufacturer = entryManufacturer.Text;
+                //vehicle.Model = entryModel.Text;
+                //vehicle.YearModel = YearModel;
 
                 vehicleList.Add(vehicle);
                 listViewVehicles.ItemsSource = null;
@@ -52,19 +60,19 @@
             if (e.Value != true) return;
 
             // Skapa en temporär filtrerad lista baserat på vilken radioknapp som är vald
-            List<Vehicle> filteredList;
+            IEnumerable<Vehicle> filteredList;
 
             if (radioCar.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v.VehicleType == Vehicle.Type.Bil).ToList();
+                filteredList = vehicleList.Where(v => v is Car).ToList();
             }
             else if (radioMC.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v.VehicleType == Vehicle.Type.MC).ToList();
+                filteredList = vehicleList.Where(v => v is MC).ToList();
             }
             else if (radioTruck.IsChecked)
             {
-                filteredList = vehicleList.Where(v => v.VehicleType == Vehicle.Type.Lastbil).ToList();
+                filteredList = vehicleList.Where(v => v is Truck).ToList();
             }
             else
             {
