@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PRG_MAUI_Car_Register.Model
+﻿namespace PRG_MAUI_Car_Register.Model
 {
     internal class Truck : Vehicle
     {
-        public Truck(string vehicleType, string registrationNumber, string manufacturer, string model, string yearModel) : base(vehicleType, registrationNumber, manufacturer, model, yearModel)
+        public Truck(string registrationNumber, string manufacturer, string model, int yearModel) : base(registrationNumber, manufacturer, model, yearModel)
         {
+            VehicleType = "Lastbil";
         }
 
         public override string GetDescription()

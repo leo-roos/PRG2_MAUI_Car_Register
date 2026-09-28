@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PRG_MAUI_Car_Register.Model
+﻿namespace PRG_MAUI_Car_Register.Model
 {
     internal class Car : Vehicle
     {
         private int doors;
-        public Car(string vehicleType, string registrationNumber, string manufacturer, string model, string yearModel, int doors) : base(vehicleType, registrationNumber, manufacturer, model, yearModel)
+        public Car(string registrationNumber, string manufacturer, string model, int yearModel, int doors) : base(registrationNumber, manufacturer, model, yearModel)
         {
-            this.doors = doors;
+            VehicleType = "Bil";
+            Doors = doors;
         }
 
         public int Doors
