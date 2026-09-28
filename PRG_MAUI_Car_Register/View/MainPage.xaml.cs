@@ -1,6 +1,5 @@
 ﻿using PRG_MAUI_Car_Register.Model;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 
 namespace PRG_MAUI_Car_Register.View
 {
@@ -27,15 +26,16 @@ namespace PRG_MAUI_Car_Register.View
 
         private void OnRegisterClicked(object sender, EventArgs e)
         {
-            if (!int.TryParse(entryYearModel.Text, out int YearModel))
-            {
-                throw new ArgumentNullException("Årsmodell måste anges i enbart siffror.");
-            }
-
             Vehicle vehicle = null;
             try
             {
-                string selectedItem = pickerType.SelectedItem.ToString();
+                if (!int.TryParse(entryYearModel.Text, out int YearModel))
+                {
+                    throw new ArgumentException("Årsmodell måste anges i enbart siffror.");
+                }
+
+                string selectedItem = pickerType.SelectedItem?.ToString() ?? "";
+
                 switch (selectedItem)
                 {
                     case "Bil":
@@ -51,8 +51,7 @@ namespace PRG_MAUI_Car_Register.View
                         break;
 
                     default:
-                        Debug.WriteLine($"Invalid car type: {selectedItem}");
-                        break;
+                        throw new ArgumentException($"Ogiltig bil typ: {selectedItem}");
                 }
 
                 if (vehicle == null)
