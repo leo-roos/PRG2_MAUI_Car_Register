@@ -1,5 +1,6 @@
 ﻿using PRG_MAUI_Car_Register.Model;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace PRG_MAUI_Car_Register.View
 {
@@ -26,21 +27,38 @@ namespace PRG_MAUI_Car_Register.View
 
         private void OnRegisterClicked(object sender, EventArgs e)
         {
-            //int YearModel = 0;
-            //if (!int.TryParse(entryYearModel.Text, out YearModel))
-            //{
-            //    throw new ArgumentNullException("Årsmodell måste anges i enbart siffror.");
-            //}
+            if (!int.TryParse(entryYearModel.Text, out int YearModel))
+            {
+                throw new ArgumentNullException("Årsmodell måste anges i enbart siffror.");
+            }
 
+            Vehicle vehicle = null;
             try
             {
-                Car vehicle = new Car(pickerType.SelectedItem.ToString(), entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, entryYearModel.Text, 5);
+                string selectedItem = pickerType.SelectedItem.ToString();
+                switch (selectedItem)
+                {
+                    case "Bil":
+                        vehicle = new Car(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, 5);
+                        break;
 
-                //vehicle.RegistrationNumber = entryRegistrationNumber.Text;
-                //vehicle.Manufacturer = entryManufacturer.Text;
-                //vehicle.Model = entryModel.Text;
-                //vehicle.YearModel = YearModel;
+                    case "MC":
+                        vehicle = new MC(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel);
+                        break;
 
+                    case "Lastbil":
+                        vehicle = new Truck(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel);
+                        break;
+
+                    default:
+                        Debug.WriteLine($"Invalid car type: {selectedItem}");
+                        break;
+                }
+
+                if (vehicle == null)
+                {
+                    return;
+                }
                 vehicleList.Add(vehicle);
                 listViewVehicles.ItemsSource = null;
                 listViewVehicles.ItemsSource = vehicleList;
