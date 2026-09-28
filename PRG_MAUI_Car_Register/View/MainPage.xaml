@@ -10,7 +10,7 @@
             <Grid ColumnDefinitions="*, 0.2*, Auto, 0.5*" ColumnSpacing="5">
                 <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
                 <Label Grid.Column="2" Text="Välj typ:" VerticalOptions="Center"/>
-                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed">
+                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed" SelectedIndexChanged="pickerType_SelectedIndexChanged">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Bil</x:String>
@@ -22,7 +22,16 @@
             </Grid>
             <Entry x:Name="entryManufacturer" Placeholder="Tillverkare" ReturnType="Next" />
             <Entry x:Name="entryModel" Placeholder="Modell" ReturnType="Next" />
+
+            <Grid x:Name="carFieldsGrid" RowDefinitions="*" RowSpacing="10">
+                <Entry x:Name="entryDoors" Grid.Row="0" Placeholder="Antal dörrar" ReturnType="Next" />
+            </Grid>
+            <Grid x:Name="trucksFieldsGrid" RowDefinitions="*" RowSpacing="10">
+                <Entry x:Name="entryLoadCapacity" Grid.Row="0" Placeholder="Lastkapacitet" ReturnType="Next" />
+            </Grid>
+            
             <Entry x:Name="entryYearModel" Placeholder="Årsmodell" Keyboard="Numeric" Completed="OnRegisterClicked" ReturnType="Done" />
+
             <Button x:Name="buttonRegister" Text="Registrera" Clicked="OnRegisterClicked" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
 
             <Label Text="Kategori:" FontAttributes="Bold" />

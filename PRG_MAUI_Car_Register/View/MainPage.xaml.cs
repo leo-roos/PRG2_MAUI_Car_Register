@@ -23,6 +23,23 @@ namespace PRG_MAUI_Car_Register.View
             //vehicle.YearModel = 2024;
         }
 
+        private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            carFieldsGrid.IsVisible = false;
+            trucksFieldsGrid.IsVisible = false;
+            switch (pickerType.SelectedItem)
+            {
+                case "Bil":
+                    carFieldsGrid.IsVisible = true;
+                    break;
+                case "MC":
+                    break;
+                case "Lastbil":
+                    trucksFieldsGrid.IsVisible = true;
+                    break;
+            }
+        }
+
         private void OnRegisterClicked(object sender, EventArgs e)
         {
             Vehicle vehicle = null;
@@ -38,7 +55,12 @@ namespace PRG_MAUI_Car_Register.View
                 switch (selectedItem)
                 {
                     case "Bil":
-                        vehicle = new Car(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, 5);
+                        if (!int.TryParse(entryDoors.Text, out int Doors))
+                        {
+                            throw new ArgumentException("Dörrar måste anges i enbart siffror.");
+                        }
+
+                        vehicle = new Car(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, Doors);
                         break;
 
                     case "MC":
@@ -46,7 +68,12 @@ namespace PRG_MAUI_Car_Register.View
                         break;
 
                     case "Lastbil":
-                        vehicle = new Truck(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel);
+                        if (!int.TryParse(entryLoadCapacity.Text, out int LoadCapacity))
+                        {
+                            throw new ArgumentException("Lastkapacitet måste anges i enbart siffror.");
+                        }
+
+                        vehicle = new Truck(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, LoadCapacity);
                         break;
 
                     default:
@@ -130,6 +157,8 @@ namespace PRG_MAUI_Car_Register.View
             entryRegistrationNumber.Text = string.Empty;
             entryManufacturer.Text = string.Empty;
             entryModel.Text = string.Empty;
+            entryDoors.Text = string.Empty;
+            entryLoadCapacity.Text = string.Empty;
             entryYearModel.Text = string.Empty;
         }
     }
