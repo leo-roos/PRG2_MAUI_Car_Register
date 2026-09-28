@@ -10,7 +10,7 @@
             <Grid ColumnDefinitions="*, 0.2*, Auto, 0.5*" ColumnSpacing="5">
                 <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
                 <Label Grid.Column="2" Text="Välj typ:" VerticalOptions="Center"/>
-                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed" SelectedIndexChanged="pickerType_SelectedIndexChanged">
+                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Bil</x:String>
@@ -33,7 +33,28 @@
                 <RadioButton x:Name="radioTruck" Content="Lastbil" CheckedChanged="OnRadioCheckedChanged" />
             </HorizontalStackLayout>
 
-            <ListView x:Name="listViewVehicles" Margin="0,0,0,20"/>
+            <CollectionView x:Name="CollectionViewVehicles" Margin="0,0,0,20" SelectionMode="None">
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="100,100,*,*,100" ColumnSpacing="10" Padding="5">
+                        <Label Grid.Column="0" Text="Typ"/>
+                        <Label Grid.Column="1" Text="Reg.nr"/>
+                        <Label Grid.Column="2" Text="Tillverkare"/>
+                        <Label Grid.Column="3" Text="Modell"/>
+                        <Label Grid.Column="4" Text="Årsmodell"/>
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="100,100,*,*,100" ColumnSpacing="10" Padding="5">
+                            <Label Grid.Column="0" Text="{Binding VehicleType}"/>
+                            <Label Grid.Column="1" Text="{Binding RegistrationNumber}"/>
+                            <Label Grid.Column="2" Text="{Binding Manufacturer}"/>
+                            <Label Grid.Column="3" Text="{Binding Model}"/>
+                            <Label Grid.Column="4" Text="{Binding YearModel}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="20">
                 <Entry x:Name="entrySearchRegistrationNumber" HorizontalOptions="FillAndExpand" Placeholder="Sök på registreringsnummer" TextTransform="Uppercase" Completed="OnSearchClicked"></Entry>

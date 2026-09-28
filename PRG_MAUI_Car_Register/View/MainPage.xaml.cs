@@ -5,23 +5,21 @@ namespace PRG_MAUI_Car_Register.View
 {
     public partial class MainPage : ContentPage
     {
-        ObservableCollection<Vehicle> vehicleList = new ObservableCollection<Vehicle>();
+        ObservableCollection<Vehicle> vehicleList;
 
         public MainPage()
         {
             InitializeComponent();
             pickerType.SelectedIndex = 0;
 
+            vehicleList = new ObservableCollection<Vehicle>();
+            CollectionViewVehicles.ItemsSource = vehicleList;
+
             //Vehicle vehicle = new Vehicle((Vehicle.Type)(0));
             //vehicle.RegistrationNumber = "ABC 123";
             //vehicle.Manufacturer = "BMW";
             //vehicle.Model = "M4-325";
             //vehicle.YearModel = 2024;
-        }
-
-        private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void OnRegisterClicked(object sender, EventArgs e)
@@ -59,8 +57,8 @@ namespace PRG_MAUI_Car_Register.View
                     return;
                 }
                 vehicleList.Add(vehicle);
-                listViewVehicles.ItemsSource = null;
-                listViewVehicles.ItemsSource = vehicleList;
+                CollectionViewVehicles.ItemsSource = null;
+                CollectionViewVehicles.ItemsSource = vehicleList;
 
                 ClearTextFields();
             }
@@ -97,7 +95,7 @@ namespace PRG_MAUI_Car_Register.View
                 filteredList = vehicleList;
             }
 
-            listViewVehicles.ItemsSource = filteredList;
+            CollectionViewVehicles.ItemsSource = filteredList;
         }
 
         private void OnSearchClicked(object sender, EventArgs e)
