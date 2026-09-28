@@ -27,10 +27,10 @@
 
             <Label Text="Kategori:" FontAttributes="Bold" />
             <HorizontalStackLayout HorizontalOptions="Center" Margin="0,0,0,20" Spacing="10" >
-                <RadioButton x:Name="radioAll" Content="Alla" IsChecked="True" CheckedChanged="OnRadioCheckedChanged" />
-                <RadioButton x:Name="radioCar" Content="Bilar" CheckedChanged="OnRadioCheckedChanged" />
-                <RadioButton x:Name="radioMC" Content="MC" CheckedChanged="OnRadioCheckedChanged" />
-                <RadioButton x:Name="radioTruck" Content="Lastbil" CheckedChanged="OnRadioCheckedChanged" />
+                <RadioButton Content="Alla" IsChecked="True" CheckedChanged="OnRadioCheckedChanged" />
+                <RadioButton Content="Bil" CheckedChanged="OnRadioCheckedChanged" />
+                <RadioButton Content="MC" CheckedChanged="OnRadioCheckedChanged" />
+                <RadioButton Content="Lastbil" CheckedChanged="OnRadioCheckedChanged" />
             </HorizontalStackLayout>
 
             <CollectionView x:Name="CollectionViewVehicles" Margin="0,0,0,20" SelectionMode="None">

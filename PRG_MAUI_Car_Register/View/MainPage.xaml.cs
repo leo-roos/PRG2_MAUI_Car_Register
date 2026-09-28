@@ -1,5 +1,6 @@
 ﻿using PRG_MAUI_Car_Register.Model;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace PRG_MAUI_Car_Register.View
 {
@@ -74,25 +75,25 @@ namespace PRG_MAUI_Car_Register.View
         {
             if (e.Value != true) return;
 
+            RadioButton radioButton = (RadioButton)sender;
+
             // Skapa en temporär filtrerad lista baserat på vilken radioknapp som är vald
             IEnumerable<Vehicle> filteredList;
 
-            if (radioCar.IsChecked)
+            switch (radioButton.Content)
             {
-                filteredList = vehicleList.Where(v => v is Car).ToList();
-            }
-            else if (radioMC.IsChecked)
-            {
-                filteredList = vehicleList.Where(v => v is MC).ToList();
-            }
-            else if (radioTruck.IsChecked)
-            {
-                filteredList = vehicleList.Where(v => v is Truck).ToList();
-            }
-            else
-            {
-                // Om "Alla" är vald, visa hela listan
-                filteredList = vehicleList;
+                case "Bil":
+                    filteredList = vehicleList.Where(v => v is Car).ToList();
+                    break;
+                case "MC":
+                    filteredList = vehicleList.Where(v => v is MC).ToList();
+                    break;
+                case "Lastbil":
+                    filteredList = vehicleList.Where(v => v is Truck).ToList();
+                    break;
+                default:
+                    filteredList = vehicleList;
+                    break;
             }
 
             CollectionViewVehicles.ItemsSource = filteredList;
