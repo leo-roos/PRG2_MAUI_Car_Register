@@ -26,6 +26,7 @@ namespace PRG_MAUI_Car_Register.View
         private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
         {
             carFieldsGrid.IsVisible = false;
+            mcFieldsGrid.IsVisible = false;
             trucksFieldsGrid.IsVisible = false;
             switch (pickerType.SelectedItem)
             {
@@ -33,6 +34,7 @@ namespace PRG_MAUI_Car_Register.View
                     carFieldsGrid.IsVisible = true;
                     break;
                 case "MC":
+                    mcFieldsGrid.IsVisible = true;
                     break;
                 case "Lastbil":
                     trucksFieldsGrid.IsVisible = true;
@@ -64,7 +66,12 @@ namespace PRG_MAUI_Car_Register.View
                         break;
 
                     case "MC":
-                        vehicle = new MC(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel);
+                        if (!int.TryParse(entryCylinderVolume.Text, out int CylinderVolume))
+                        {
+                            throw new ArgumentException("Cylindervolym måste anges i enbart siffror.");
+                        }
+
+                        vehicle = new MC(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, CylinderVolume);
                         break;
 
                     case "Lastbil":
@@ -160,6 +167,7 @@ namespace PRG_MAUI_Car_Register.View
             entryDoors.Text = string.Empty;
             entryLoadCapacity.Text = string.Empty;
             entryYearModel.Text = string.Empty;
+            entryCylinderVolume.Text = string.Empty;
         }
     }
 }

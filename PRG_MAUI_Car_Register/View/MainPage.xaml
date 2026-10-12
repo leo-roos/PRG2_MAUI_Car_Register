@@ -22,9 +22,13 @@
             </Grid>
             <Entry x:Name="entryManufacturer" Placeholder="Tillverkare" ReturnType="Next" />
             <Entry x:Name="entryModel" Placeholder="Modell" ReturnType="Next" />
+            <Entry x:Name="entryYearModel" Placeholder="Årsmodell" Keyboard="Numeric" ReturnType="Next" />
 
             <Grid x:Name="carFieldsGrid" RowDefinitions="*" RowSpacing="10">
                 <Entry x:Name="entryDoors" Grid.Row="0" Placeholder="Antal dörrar" ReturnType="Next" />
+            </Grid>
+            <Grid x:Name="mcFieldsGrid" RowDefinitions="*" RowSpacing="10">
+                <Entry x:Name="entryCylinderVolume" Grid.Row="0" Placeholder="Cylindervolym (cc)" Keyboard="Numeric" ReturnType="Next" />
             </Grid>
             <Grid x:Name="trucksFieldsGrid" RowDefinitions="*" RowSpacing="10">
                 <Entry x:Name="entryLoadCapacity" Grid.Row="0" Placeholder="Lastkapacitet" ReturnType="Next" />
