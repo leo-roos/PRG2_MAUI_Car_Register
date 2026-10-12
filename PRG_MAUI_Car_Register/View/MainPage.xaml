@@ -34,8 +34,6 @@
                 <Entry x:Name="entryLoadCapacity" Grid.Row="0" Placeholder="Lastkapacitet" ReturnType="Next" />
             </Grid>
             
-            <Entry x:Name="entryYearModel" Placeholder="Årsmodell" Keyboard="Numeric" Completed="OnRegisterClicked" ReturnType="Done" />
-
             <Button x:Name="buttonRegister" Text="Registrera" Clicked="OnRegisterClicked" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
 
             <Label Text="Kategori:" FontAttributes="Bold" />

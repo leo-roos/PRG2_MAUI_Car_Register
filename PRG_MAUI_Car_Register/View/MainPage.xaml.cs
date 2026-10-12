@@ -164,9 +164,9 @@ namespace PRG_MAUI_Car_Register.View
             entryRegistrationNumber.Text = string.Empty;
             entryManufacturer.Text = string.Empty;
             entryModel.Text = string.Empty;
+            entryYearModel.Text = string.Empty;
             entryDoors.Text = string.Empty;
             entryLoadCapacity.Text = string.Empty;
-            entryYearModel.Text = string.Empty;
             entryCylinderVolume.Text = string.Empty;
         }
     }
