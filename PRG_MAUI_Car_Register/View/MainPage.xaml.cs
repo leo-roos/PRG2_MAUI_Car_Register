@@ -143,15 +143,35 @@ namespace PRG_MAUI_Car_Register.View
                 return;
             }
 
-            var foundVehicle = vehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
+            Vehicle foundVehicle = vehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
 
             if (foundVehicle != null)
             {
+                string extraText = "";
+
+                if (foundVehicle is Car)
+                {
+                    Car vehicle = (Car)foundVehicle;
+                    extraText = $"Antal dörrar: {vehicle.Doors}";
+                }
+                else if (foundVehicle is MC)
+                {
+                    MC vehicle = (MC)foundVehicle;
+                    extraText = $"Cylindervolym: {vehicle.CylinderVolume}";
+                }
+                else if (foundVehicle is Truck)
+                {
+                    Truck vehicle = (Truck)foundVehicle;
+                    extraText = $"Lastkapacitet: {vehicle.LoadCapacity}";
+                }
+
                 labelSearchResult.Text = $"Fordon hittat:\n" +
                                          $"Registreringsnummer: {foundVehicle.RegistrationNumber}\n" +
                                          $"Tillverkare: {foundVehicle.Manufacturer}\n" +
                                          $"Modell: {foundVehicle.Model}\n" +
-                                         $"Typ: {foundVehicle.VehicleType}";
+                                         $"Typ: {foundVehicle.VehicleType}\n" +
+                                         $"{extraText}";
+                
             }
             else
             {
