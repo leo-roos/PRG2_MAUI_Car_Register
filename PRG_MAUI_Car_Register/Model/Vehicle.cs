@@ -2,22 +2,30 @@
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 
-namespace PRG_MAUI_Car_Register
+namespace PRG_MAUI_Car_Register.Model
 {
-    class Vehicle
+    abstract class Vehicle
     {
-        // Medlemsvariabler
-        public enum Type { Bil, MC, Lastbil };
-        private Type vehicleType;
+        private string vehicleType = string.Empty;
         private string registrationNumber = string.Empty;
         private string manufacturer = string.Empty;
         private string model = string.Empty;
         private string yearModel = string.Empty;
 
         // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
-        public Vehicle(Type vehicleType) // en konstruktor kan, men måste inte, ta parametrar
+        public Vehicle(string registrationNumber, string manufacturer, string model, int yearModel) // en konstruktor kan, men måste inte, ta parametrar
         {
-            this.vehicleType = vehicleType;
+            RegistrationNumber = registrationNumber;
+            Manufacturer = manufacturer;
+            Model = model;
+            YearModel = yearModel;
+        }
+
+        // Fordonstyp tas in från dropdown-menyn, och behöver därför inte valideras
+        public string VehicleType
+        {
+            get { return vehicleType; }
+            set { this.vehicleType = value; }
         }
 
         // Get-Set för att hålla variablerna privata, och för att validera inkommande värden från UI (user interface, användargränssnittet)
@@ -46,13 +54,6 @@ namespace PRG_MAUI_Car_Register
 
                 registrationNumber = value.ToUpper();
             }
-        }
-
-        // Fordonstyp tas in från dropdown-menyn, och behöver därför inte valideras
-        public Type VehicleType
-        {
-            get { return vehicleType; }
-            set { this.vehicleType = value; }
         }
 
         //TODO Tillverkare ska valideras, sparas i objektet och visas i UI
@@ -133,9 +134,7 @@ namespace PRG_MAUI_Car_Register
 
 
         //TODO Modifiera overriden på ToString() så att allt visas som önskat i UIs listBox
-        public override string ToString()
-        {
-            return this.registrationNumber + "\t" + this.vehicleType + "\t" + this.manufacturer + "\t" + this.model;
-        }
+
+        public abstract string GetDescription();
     }
 }
