@@ -5,13 +5,12 @@
         private string loadCapacity = string.Empty;
         public Truck(string registrationNumber, string manufacturer, string model, int yearModel, int loadCapacity) : base(registrationNumber, manufacturer, model, yearModel)
         {
-            VehicleType = "Lastbil";
             LoadCapacity = loadCapacity;
         }
 
         public override string GetDescription()
         {
-            return $"{VehicleType} - {Manufacturer} {Model} ({YearModel}), Reg: {RegistrationNumber}";
+            return $"Lastbil - {Manufacturer} {Model} ({YearModel}), Reg: {RegistrationNumber}, Lastkapacitet: {LoadCapacity}";
         }
 
         public int LoadCapacity

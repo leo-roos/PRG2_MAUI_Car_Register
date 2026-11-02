@@ -5,13 +5,12 @@
         private string cylinderVolume = string.Empty;
         public MC(string registrationNumber, string manufacturer, string model, int yearModel, int cylinderVolume) : base(registrationNumber, manufacturer, model, yearModel)
         {
-            VehicleType = "MC";
             CylinderVolume = cylinderVolume;
         }
 
         public override string GetDescription()
         {
-            return $"{VehicleType} - {Manufacturer} {Model} ({YearModel}), Reg: {RegistrationNumber}";
+            return $"Motorcykel - {Manufacturer} {Model} ({YearModel}), Reg: {RegistrationNumber}, Cylindervolym: {CylinderVolume}";
         }
 
         public int CylinderVolume

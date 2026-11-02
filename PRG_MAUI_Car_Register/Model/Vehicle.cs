@@ -6,7 +6,6 @@ namespace PRG_MAUI_Car_Register.Model
 {
     abstract class Vehicle
     {
-        private string vehicleType = string.Empty;
         private string registrationNumber = string.Empty;
         private string manufacturer = string.Empty;
         private string model = string.Empty;
@@ -19,13 +18,6 @@ namespace PRG_MAUI_Car_Register.Model
             Manufacturer = manufacturer;
             Model = model;
             YearModel = yearModel;
-        }
-
-        // Fordonstyp tas in från dropdown-menyn, och behöver därför inte valideras
-        public string VehicleType
-        {
-            get { return vehicleType; }
-            set { this.vehicleType = value; }
         }
 
         // Get-Set för att hålla variablerna privata, och för att validera inkommande värden från UI (user interface, användargränssnittet)
