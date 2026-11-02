@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace PRG_MAUI_Car_Register.Model
 {
-    abstract class Vehicle
+    abstract public class Vehicle
     {
         private string registrationNumber = string.Empty;
         private string manufacturer = string.Empty;

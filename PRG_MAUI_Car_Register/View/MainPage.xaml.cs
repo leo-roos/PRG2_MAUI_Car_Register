@@ -6,16 +6,18 @@ namespace PRG_MAUI_Car_Register.View
 {
     public partial class MainPage : ContentPage
     {
-        ObservableCollection<Vehicle> vehicleList;
+        ObservableCollection<Vehicle> filteredList;
+        MainPageViewModel mainPageViewModel = new MainPageViewModel();
 
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+
+            BindingContext = mainPageViewModel;
             pickerType.SelectedIndex = 0;
 
-            vehicleList = new ObservableCollection<Vehicle>();
-            CollectionViewVehicles.ItemsSource = vehicleList;
+            filteredList = mainPageViewModel.VehicleList;
+            CollectionViewVehicles.ItemsSource = filteredList;
 
             //Vehicle vehicle = new Vehicle((Vehicle.Type)(0));
             //vehicle.RegistrationNumber = "ABC 123";
@@ -92,7 +94,7 @@ namespace PRG_MAUI_Car_Register.View
                 {
                     return;
                 }
-                vehicleList.Add(vehicle);
+                mainPageViewModel.VehicleList.Add(vehicle);
 
                 ClearTextFields();
             }
@@ -116,16 +118,16 @@ namespace PRG_MAUI_Car_Register.View
             switch (radioButton.Content)
             {
                 case "Bil":
-                    filteredList = vehicleList.Where(v => v is Car).ToList();
+                    filteredList = mainPageViewModel.VehicleList.Where(v => v is Car).ToList();
                     break;
                 case "MC":
-                    filteredList = vehicleList.Where(v => v is MC).ToList();
+                    filteredList = mainPageViewModel.VehicleList.Where(v => v is MC).ToList();
                     break;
                 case "Lastbil":
-                    filteredList = vehicleList.Where(v => v is Truck).ToList();
+                    filteredList = mainPageViewModel.VehicleList.Where(v => v is Truck).ToList();
                     break;
                 default:
-                    filteredList = vehicleList;
+                    filteredList = mainPageViewModel.VehicleList;
                     break;
             }
 
@@ -142,13 +144,12 @@ namespace PRG_MAUI_Car_Register.View
                 return;
             }
 
-            Vehicle foundVehicle = vehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
+            Vehicle foundVehicle = mainPageViewModel.VehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
 
             if (foundVehicle != null)
             {
                 labelSearchResult.Text = $"Fordon hittat:\n" +
                                          $"{foundVehicle.GetDescription()}";
-                
             }
             else
             {

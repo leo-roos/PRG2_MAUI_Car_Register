@@ -8,9 +8,9 @@
             <Image Source="car.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
 
             <Grid ColumnDefinitions="*, 0.2*, Auto, 0.5*" ColumnSpacing="5">
-                <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
+                <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Text="{Binding RegistrationNumber}" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
                 <Label Grid.Column="2" Text="Välj typ:" VerticalOptions="Center"/>
-                <Picker Grid.Column="3" x:Name="pickerType" TextColor="DarkRed" SelectedIndexChanged="pickerType_SelectedIndexChanged">
+                <Picker Grid.Column="3" x:Name="pickerType" SelectedItem="{Binding VehicleType}" TextColor="DarkRed">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Bil</x:String>
@@ -20,21 +20,21 @@
                     </Picker.ItemsSource>
                 </Picker>
             </Grid>
-            <Entry x:Name="entryManufacturer" Placeholder="Tillverkare" ReturnType="Next" />
-            <Entry x:Name="entryModel" Placeholder="Modell" ReturnType="Next" />
-            <Entry x:Name="entryYearModel" Placeholder="Årsmodell" Keyboard="Numeric" ReturnType="Next" />
+            <Entry x:Name="entryManufacturer" Text="{Binding Manufacturer}" Placeholder="Tillverkare" ReturnType="Next" />
+            <Entry x:Name="entryModel" Text="{Binding Model}" Placeholder="Modell" ReturnType="Next" />
+            <Entry x:Name="entryYearModel" Text="{Binding YearModel}" Placeholder="Årsmodell" Keyboard="Numeric" ReturnType="Next" />
 
-            <Grid x:Name="carFieldsGrid" RowDefinitions="*" RowSpacing="10">
-                <Entry x:Name="entryDoors" Grid.Row="0" Placeholder="Antal dörrar" ReturnType="Next" />
+            <Grid x:Name="carFieldsGrid" RowDefinitions="*" RowSpacing="10" IsVisible="{Binding IsCar}">
+                <Entry x:Name="entryDoors" Text="{Binding Doors}" Grid.Row="0" Placeholder="Antal dörrar" ReturnType="Next" />
             </Grid>
-            <Grid x:Name="mcFieldsGrid" RowDefinitions="*" RowSpacing="10">
-                <Entry x:Name="entryCylinderVolume" Grid.Row="0" Placeholder="Cylindervolym (cc)" Keyboard="Numeric" ReturnType="Next" />
+            <Grid x:Name="mcFieldsGrid" RowDefinitions="*" RowSpacing="10" IsVisible="{Binding IsMC}">
+                <Entry x:Name="entryCylinderVolume" Text="{Binding CylinderVolume}" Grid.Row="0" Placeholder="Cylindervolym (cc)" Keyboard="Numeric" ReturnType="Next" />
             </Grid>
-            <Grid x:Name="trucksFieldsGrid" RowDefinitions="*" RowSpacing="10">
-                <Entry x:Name="entryLoadCapacity" Grid.Row="0" Placeholder="Lastkapacitet" ReturnType="Next" />
+            <Grid x:Name="trucksFieldsGrid" RowDefinitions="*" RowSpacing="10" IsVisible="{Binding IsTruck}">
+                <Entry x:Name="entryLoadCapacity" Text="{Binding LoadCapacity}" Grid.Row="0" Placeholder="Lastkapacitet" ReturnType="Next" />
             </Grid>
             
-            <Button x:Name="buttonRegister" Text="Registrera" Clicked="OnRegisterClicked" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
+            <Button x:Name="buttonRegister" Text="Registrera" Command="{Binding RegisterCommand}" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
 
             <Label Text="Kategori:" FontAttributes="Bold" />
             <HorizontalStackLayout HorizontalOptions="Center" Margin="0,0,0,20" Spacing="10" >
@@ -66,10 +66,10 @@
             </CollectionView>
 
             <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="20">
-                <Entry x:Name="entrySearchRegistrationNumber" HorizontalOptions="FillAndExpand" Placeholder="Sök på registreringsnummer" TextTransform="Uppercase" Completed="OnSearchClicked"></Entry>
-                <Button x:Name="buttonSearch" Text="Sök" HorizontalOptions="End" BackgroundColor="DarkRed" TextColor="White" Clicked="OnSearchClicked"/>
+                <Entry x:Name="entrySearchRegistrationNumber" Text="{Binding SearchValue}" ReturnCommand="{Binding SearchCommand}" HorizontalOptions="FillAndExpand" Placeholder="Sök på registreringsnummer" TextTransform="Uppercase"></Entry>
+                <Button x:Name="buttonSearch" Command="{Binding SearchCommand}" Text="Sök" HorizontalOptions="End" BackgroundColor="DarkRed" TextColor="White"/>
             </HorizontalStackLayout>
-            <Label x:Name="labelSearchResult" Text="Sökresultat visas här..." TextColor="DarkRed" Margin="0,20,0,0"/>
+            <Label x:Name="labelSearchResult" Text="{Binding SearchResult}" TextColor="DarkRed" Margin="0,20,0,0"/>
         </VerticalStackLayout>
     </ScrollView>
 
