@@ -7,9 +7,16 @@
     Shell.FlyoutBehavior="Disabled"
     Title="PRG_MAUI_Car_Register">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+     Title="Home"
+     ContentTemplate="{DataTemplate local:MainPage}"
+     Route="MainPage" />
+
+        <ShellContent
+     Title="Bilar"
+     ContentTemplate="{DataTemplate local:CarsPage}"
+     Route="CarsPage" />
+    </TabBar>
 
 </Shell>

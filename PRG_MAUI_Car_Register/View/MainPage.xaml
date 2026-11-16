@@ -37,14 +37,21 @@
             <Button x:Name="buttonRegister" Text="Registrera" Command="{Binding RegisterCommand}" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
 
             <Label Text="Kategori:" FontAttributes="Bold" />
-            <HorizontalStackLayout HorizontalOptions="Center" Margin="0,0,0,20" Spacing="10" >
+            <HorizontalStackLayout HorizontalOptions="Start" Margin="0,0,0,20" Spacing="10">
+                <Button Text="Alla" Command="{Binding ViewFilterCommand}" CommandParameter="all" />
+                <Button Text="Bilar" Command="{Binding ViewFilterCommand}" CommandParameter="car" />
+                <Button Text="Lastbilar" Command="{Binding ViewFilterCommand}" CommandParameter="truck" />
+                <Button Text="MC" Command="{Binding ViewFilterCommand}" CommandParameter="mc" />
+
+                <!--
                 <RadioButton Content="Alla" IsChecked="True" CheckedChanged="OnRadioCheckedChanged" />
                 <RadioButton Content="Bil" CheckedChanged="OnRadioCheckedChanged" />
                 <RadioButton Content="MC" CheckedChanged="OnRadioCheckedChanged" />
                 <RadioButton Content="Lastbil" CheckedChanged="OnRadioCheckedChanged" />
+                -->
             </HorizontalStackLayout>
 
-            <CollectionView x:Name="CollectionViewVehicles" Margin="0,0,0,20" SelectionMode="None">
+            <CollectionView IsVisible="False" x:Name="CollectionViewVehicles" Margin="0,0,0,20" SelectionMode="None">
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="100,*,*,100" ColumnSpacing="10" Padding="5">
                         <Label Grid.Column="0" Text="Reg.nr"/>

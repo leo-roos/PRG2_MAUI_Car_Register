@@ -7,16 +7,16 @@ namespace PRG_MAUI_Car_Register.View
     public partial class MainPage : ContentPage
     {
         ObservableCollection<Vehicle> filteredList;
-        MainPageViewModel mainPageViewModel = new MainPageViewModel();
+        //MainPageViewModel mainPageViewModel = new MainPageViewModel();
 
         public MainPage()
         {
             InitializeComponent();
 
-            BindingContext = mainPageViewModel;
+            BindingContext = MainPageViewModel.Instance;
             pickerType.SelectedIndex = 0;
 
-            filteredList = mainPageViewModel.VehicleList;
+            filteredList = MainPageViewModel.Instance.VehicleList;
             CollectionViewVehicles.ItemsSource = filteredList;
 
             //Vehicle vehicle = new Vehicle((Vehicle.Type)(0));
@@ -94,8 +94,8 @@ namespace PRG_MAUI_Car_Register.View
                 {
                     return;
                 }
-                mainPageViewModel.VehicleList.Add(vehicle);
-
+                MainPageViewModel.Instance.VehicleList.Add(vehicle);
+                    
                 ClearTextFields();
             }
 
@@ -118,16 +118,16 @@ namespace PRG_MAUI_Car_Register.View
             switch (radioButton.Content)
             {
                 case "Bil":
-                    filteredList = mainPageViewModel.VehicleList.Where(v => v is Car).ToList();
+                    filteredList = MainPageViewModel.Instance.VehicleList.Where(v => v is Car).ToList();
                     break;
                 case "MC":
-                    filteredList = mainPageViewModel.VehicleList.Where(v => v is MC).ToList();
+                    filteredList = MainPageViewModel.Instance.VehicleList.Where(v => v is MC).ToList();
                     break;
                 case "Lastbil":
-                    filteredList = mainPageViewModel.VehicleList.Where(v => v is Truck).ToList();
+                    filteredList = MainPageViewModel.Instance.VehicleList.Where(v => v is Truck).ToList();
                     break;
                 default:
-                    filteredList = mainPageViewModel.VehicleList;
+                    filteredList = MainPageViewModel.Instance.VehicleList;
                     break;
             }
 
@@ -144,7 +144,7 @@ namespace PRG_MAUI_Car_Register.View
                 return;
             }
 
-            Vehicle foundVehicle = mainPageViewModel.VehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
+            Vehicle foundVehicle = MainPageViewModel.Instance.VehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
 
             if (foundVehicle != null)
             {

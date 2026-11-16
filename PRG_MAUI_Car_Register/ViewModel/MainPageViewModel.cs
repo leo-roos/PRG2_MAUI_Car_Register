@@ -10,17 +10,37 @@ namespace PRG_MAUI_Car_Register.ViewModel
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
+        private static MainPageViewModel _instance;
+        public static MainPageViewModel Instance => _instance ??= new MainPageViewModel();
+
         public ObservableCollection<Vehicle> VehicleList { get; set; }
         public ICommand RegisterCommand { get; }
         public ICommand SearchCommand { get; }
-        
+        public ICommand ViewFilterCommand { get; }
+
         public MainPageViewModel()
         {
             VehicleList = new ObservableCollection<Vehicle>();
+            VehicleList.Add(new Car("ABC123", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC124", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC125", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC126", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC127", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC128", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC129", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC120", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC133", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC134", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC135", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC136", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC137", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC138", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC139", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Car("ABC130", "BMW", "M5", 2026, 4));
 
             RegisterCommand = new Command(() =>
             {
-                Vehicle vehicle = null;
+                Vehicle? vehicle = null;
                 try
                 {
                     if (!int.TryParse(YearModel, out int parsedYear))
@@ -98,8 +118,30 @@ namespace PRG_MAUI_Car_Register.ViewModel
                     SearchResult = "Inget fordon hittades med det registreringsnumret.";
                 }
             });
-        }
 
+            ViewFilterCommand = new Command((object type) =>
+            {
+                switch (type)
+                {
+                    case "all":
+
+                        break;
+                    case "car":
+
+                        break;
+                    case "truck":
+
+                        break;
+                    case "mc":
+
+                        break;
+                    default:
+
+                        break;
+                }
+            });
+        }
+        
         private void ClearTextFields()
         {
             RegistrationNumber = string.Empty;

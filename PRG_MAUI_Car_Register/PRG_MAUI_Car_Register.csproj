@@ -62,4 +62,16 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="View\CarsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MotorCyclesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\TrucksPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
