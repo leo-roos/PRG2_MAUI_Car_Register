@@ -14,8 +14,6 @@ namespace PRG_MAUI_Car_Register.ViewModel
         public static MainPageViewModel Instance => _instance ??= new MainPageViewModel();
 
         public ObservableCollection<Vehicle> VehicleList { get; set; }
-        public ICommand RegisterCommand { get; }
-        public ICommand SearchCommand { get; }
         public ICommand ViewFilterCommand { get; }
 
         public MainPageViewModel()
@@ -38,110 +36,33 @@ namespace PRG_MAUI_Car_Register.ViewModel
             VehicleList.Add(new Car("ABC139", "BMW", "M5", 2026, 4));
             VehicleList.Add(new Car("ABC130", "BMW", "M5", 2026, 4));
 
-            RegisterCommand = new Command(() =>
+            ViewFilterCommand = new Command<string>(async (type) =>
             {
-                Vehicle? vehicle = null;
-                try
-                {
-                    if (!int.TryParse(YearModel, out int parsedYear))
-                    {
-                        throw new ArgumentException("Årsmodell måste anges i enbart siffror.");
-                    }
-
-                    switch (VehicleType)
-                    {
-                        case "Bil":
-                            if (!int.TryParse(Doors, out int parsedDoors))
-                            {
-                                throw new ArgumentException("Dörrar måste anges i enbart siffror.");
-                            }
-
-                            vehicle = new Car(RegistrationNumber, Manufacturer, Model, parsedYear, parsedDoors);
-                            break;
-
-                        case "MC":
-                            if (!int.TryParse(CylinderVolume, out int parsedCylinder))
-                            {
-                                throw new ArgumentException("Cylindervolym måste anges i enbart siffror.");
-                            }
-
-                            vehicle = new MC(RegistrationNumber, Manufacturer, Model, parsedYear, parsedCylinder);
-                            break;
-
-                        case "Lastbil":
-                            if (!int.TryParse(LoadCapacity, out int parsedCapacity))
-                            {
-                                throw new ArgumentException("Lastkapacitet måste anges i enbart siffror.");
-                            }
-
-                            vehicle = new Truck(RegistrationNumber, Manufacturer, Model, parsedYear, parsedCapacity);
-                            break;
-
-                        default:
-                            throw new ArgumentException($"Ogiltig bil typ: {VehicleType}");
-                    }
-
-                    if (vehicle == null)
-                    {
-                        return;
-                    }
-
-                    VehicleList.Add(vehicle);
-
-                    ClearTextFields();
-                }
-                catch (ArgumentException ex)
-                {
-
-                }
-            });
-
-            SearchCommand = new Command(() =>
-            {
-                string searchTerm = SearchValue.ToLower();
-
-                if (string.IsNullOrEmpty(searchTerm))
-                {
-                    SearchResult = "Ange ett registreringsnummer för att söka.";
-                    return;
-                }
-
-                Vehicle foundVehicle = VehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
-
-                if (foundVehicle != null)
-                {
-                    SearchResult = $"Fordon hittat:\n" +
-                                  $"{foundVehicle.GetDescription()}";
-                }
-                else
-                {
-                    SearchResult = "Inget fordon hittades med det registreringsnumret.";
-                }
-            });
-
-            ViewFilterCommand = new Command((object type) =>
-            {
+                string pageRoute = string.Empty;
                 switch (type)
                 {
                     case "all":
-
+                        //pageRoute = "";
                         break;
                     case "car":
-
+                        pageRoute = "CarsPage";
                         break;
                     case "truck":
-
+                        pageRoute = "TrucksPage";
                         break;
                     case "mc":
-
-                        break;
-                    default:
-
+                        pageRoute = "MotorCyclesPage";
                         break;
                 }
+
+                if (pageRoute == string.Empty)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(type));
+                }
+                await Shell.Current.GoToAsync($"//{pageRoute}");
             });
         }
-        
+
         private void ClearTextFields()
         {
             RegistrationNumber = string.Empty;

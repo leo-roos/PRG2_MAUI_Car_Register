@@ -4,23 +4,28 @@
              x:Class="PRG_MAUI_Car_Register.View.CarsPage"
              Title="CarsPage">
     <ScrollView>
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, 300" RowSpacing="10" Margin="10">
+        <Grid Padding="20" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, 300, Auto, Auto" RowSpacing="10">
+            <Button HorizontalOptions="Start" Grid.Row="0" WidthRequest="100" Text="Gå Tillbaka" Command="{Binding GoBackCommand}" />
             <Label 
-            Grid.Row="0"
+            Grid.Row="1"
             Text="Välkommen till bil sidan!" 
             Style="{StaticResource SubHeadline}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-            <Label Grid.Row="1" Text="Registrera en ny bil?" />
-            <Button Grid.Row="2" Text="Registrera en ny bil" Command="{Binding RegisterNewVehicleCommand}" Margin="0, 0, 0, 20" />
+            <Label Grid.Row="2" Text="Registrera en ny bil?" />
+            <Button Grid.Row="3" Text="Registrera en ny bil" Command="{Binding RegisterNewVehicleCommand}" Margin="0, 0, 0, 20" />
 
-            <Label Grid.Row="3" Text="Söka efter bilar?" />
-            <Grid Grid.Row="4" RowDefinitions="*" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+            <Label Grid.Row="4" Text="Söka efter bilar?" />
+            <Grid Grid.Row="5" RowDefinitions="*" ColumnDefinitions="*, Auto" ColumnSpacing="10">
                 <Entry Text="{Binding SearchFilter}" Placeholder="ABC123" ReturnType="Next" />
                 <Button Grid.Column="1" Text="Sök" Command="{Binding SearchCommand}" />
             </Grid>
-            <CollectionView Grid.Row="5" ItemsSource="{Binding CarsList}" SelectionMode="None">
+            <CollectionView Grid.Row="6" ItemsSource="{Binding CarsList}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedItem}"
+                SelectionChangedCommand="{Binding ChooseVehicleCommand}"
+            >
                 <CollectionView.Header>
                     <Grid ColumnDefinitions="100,*,*,100" ColumnSpacing="10" Padding="5">
                         <Label Grid.Column="0" Text="Reg.nr"/>
@@ -40,6 +45,9 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <Label Grid.Row="7" Text="Vald bil:" />
+            <Label Grid.Row="8" Text="{Binding ChosenVehicleDetails}" />
         </Grid>
     </ScrollView>
 </ContentPage>

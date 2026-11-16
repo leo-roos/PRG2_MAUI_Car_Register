@@ -1,6 +1,5 @@
 ﻿using PRG_MAUI_Car_Register.Model;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
@@ -9,21 +8,30 @@ namespace PRG_MAUI_Car_Register.ViewModel
     internal class CarsViewModel : INotifyPropertyChanged
     {
         public List<Vehicle> CarsList { get; set; }
+        public ICommand GoBackCommand { get; }
         public ICommand SearchCommand { get; }
         public ICommand RegisterNewVehicleCommand { get; }
+        public ICommand ChooseVehicleCommand { get; }
 
         public CarsViewModel()
         {
             SetFilter();
 
+            GoBackCommand = new Command(async () =>
+            {
+                await Shell.Current.GoToAsync("//MainPage");
+            });
             SearchCommand = new Command(() =>
             {
                 SetFilter();
             });
             RegisterNewVehicleCommand = new Command(async () =>
             {
-                Debug.WriteLine("test");
                 await Shell.Current.GoToAsync("//RegisterNewCarPage");
+            });
+            ChooseVehicleCommand = new Command(() =>
+            {
+                ChosenVehicleDetails = SelectedItem.GetDescription();
             });
         }
 
@@ -47,6 +55,40 @@ namespace PRG_MAUI_Car_Register.ViewModel
                 {
                     searchFilter = value;
                     SetFilter();
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private Vehicle selectedItem;
+        public Vehicle SelectedItem
+        {
+            get
+            {
+                return selectedItem;
+            }
+            set
+            {
+                if (selectedItem != value)
+                {
+                    selectedItem = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string chosenVehicleDetails = "Ingen bil vald.";
+        public string ChosenVehicleDetails
+        {
+            get
+            {
+                return chosenVehicleDetails;
+            }
+            set
+            {
+                if (chosenVehicleDetails != value)
+                {
+                    chosenVehicleDetails = value;
                     OnPropertyChanged();
                 }
             }

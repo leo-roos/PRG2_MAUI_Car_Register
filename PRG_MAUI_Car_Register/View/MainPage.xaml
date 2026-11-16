@@ -4,80 +4,19 @@
              x:Class="PRG_MAUI_Car_Register.View.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="10">
-            <Image Source="car.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
+        <Grid Padding="20" RowDefinitions="Auto, Auto, Auto, Auto" RowSpacing="10">
+            <Label Grid.Row="0" Text="Välkommen till Biluthyrningens App!" Style="{StaticResource SubHeadline}" />
 
-            <Grid ColumnDefinitions="*, 0.2*, Auto, 0.5*" ColumnSpacing="5">
-                <Entry Grid.Column="0" x:Name="entryRegistrationNumber" Text="{Binding RegistrationNumber}" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
-                <Label Grid.Column="2" Text="Välj typ:" VerticalOptions="Center"/>
-                <Picker Grid.Column="3" x:Name="pickerType" SelectedItem="{Binding VehicleType}" TextColor="DarkRed">
-                    <Picker.ItemsSource>
-                        <x:Array Type="{x:Type x:String}">
-                            <x:String>Bil</x:String>
-                            <x:String>MC</x:String>
-                            <x:String>Lastbil</x:String>
-                        </x:Array>
-                    </Picker.ItemsSource>
-                </Picker>
-            </Grid>
-            <Entry x:Name="entryManufacturer" Text="{Binding Manufacturer}" Placeholder="Tillverkare" ReturnType="Next" />
-            <Entry x:Name="entryModel" Text="{Binding Model}" Placeholder="Modell" ReturnType="Next" />
-            <Entry x:Name="entryYearModel" Text="{Binding YearModel}" Placeholder="Årsmodell" Keyboard="Numeric" ReturnType="Next" />
+            <Image Grid.Row="1" Source="car.jpg" Aspect="AspectFit" HeightRequest="150" Margin="0,0,0,20"/>
 
-            <Grid x:Name="carFieldsGrid" RowDefinitions="*" RowSpacing="10" IsVisible="{Binding IsCar}">
-                <Entry x:Name="entryDoors" Text="{Binding Doors}" Grid.Row="0" Placeholder="Antal dörrar" ReturnType="Next" />
-            </Grid>
-            <Grid x:Name="mcFieldsGrid" RowDefinitions="*" RowSpacing="10" IsVisible="{Binding IsMC}">
-                <Entry x:Name="entryCylinderVolume" Text="{Binding CylinderVolume}" Grid.Row="0" Placeholder="Cylindervolym (cc)" Keyboard="Numeric" ReturnType="Next" />
-            </Grid>
-            <Grid x:Name="trucksFieldsGrid" RowDefinitions="*" RowSpacing="10" IsVisible="{Binding IsTruck}">
-                <Entry x:Name="entryLoadCapacity" Text="{Binding LoadCapacity}" Grid.Row="0" Placeholder="Lastkapacitet" ReturnType="Next" />
-            </Grid>
-            
-            <Button x:Name="buttonRegister" Text="Registrera" Command="{Binding RegisterCommand}" Margin="0,0,0,20" BackgroundColor="DarkRed"/>
-
-            <Label Text="Kategori:" FontAttributes="Bold" />
-            <HorizontalStackLayout HorizontalOptions="Start" Margin="0,0,0,20" Spacing="10">
+            <Label Grid.Row="2" Text="Vill du registrera ett fordon?" FontAttributes="Bold" />
+            <Grid Grid.Row="3" ColumnDefinitions="*, *, *" ColumnSpacing="10">
                 <Button Text="Alla" Command="{Binding ViewFilterCommand}" CommandParameter="all" />
-                <Button Text="Bilar" Command="{Binding ViewFilterCommand}" CommandParameter="car" />
-                <Button Text="Lastbilar" Command="{Binding ViewFilterCommand}" CommandParameter="truck" />
-                <Button Text="MC" Command="{Binding ViewFilterCommand}" CommandParameter="mc" />
-
-                <!--
-                <RadioButton Content="Alla" IsChecked="True" CheckedChanged="OnRadioCheckedChanged" />
-                <RadioButton Content="Bil" CheckedChanged="OnRadioCheckedChanged" />
-                <RadioButton Content="MC" CheckedChanged="OnRadioCheckedChanged" />
-                <RadioButton Content="Lastbil" CheckedChanged="OnRadioCheckedChanged" />
-                -->
-            </HorizontalStackLayout>
-
-            <CollectionView IsVisible="False" x:Name="CollectionViewVehicles" Margin="0,0,0,20" SelectionMode="None">
-                <CollectionView.Header>
-                    <Grid ColumnDefinitions="100,*,*,100" ColumnSpacing="10" Padding="5">
-                        <Label Grid.Column="0" Text="Reg.nr"/>
-                        <Label Grid.Column="1" Text="Tillverkare"/>
-                        <Label Grid.Column="2" Text="Modell"/>
-                        <Label Grid.Column="3" Text="Årsmodell"/>
-                    </Grid>
-                </CollectionView.Header>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid ColumnDefinitions="100,*,*,100" ColumnSpacing="10" Padding="5">
-                            <Label Grid.Column="0" Text="{Binding RegistrationNumber}"/>
-                            <Label Grid.Column="1" Text="{Binding Manufacturer}"/>
-                            <Label Grid.Column="2" Text="{Binding Model}"/>
-                            <Label Grid.Column="3" Text="{Binding YearModel}"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
-            <HorizontalStackLayout HorizontalOptions="FillAndExpand" Spacing="20">
-                <Entry x:Name="entrySearchRegistrationNumber" Text="{Binding SearchValue}" ReturnCommand="{Binding SearchCommand}" HorizontalOptions="FillAndExpand" Placeholder="Sök på registreringsnummer" TextTransform="Uppercase"></Entry>
-                <Button x:Name="buttonSearch" Command="{Binding SearchCommand}" Text="Sök" HorizontalOptions="End" BackgroundColor="DarkRed" TextColor="White"/>
-            </HorizontalStackLayout>
-            <Label x:Name="labelSearchResult" Text="{Binding SearchResult}" TextColor="DarkRed" Margin="0,20,0,0"/>
-        </VerticalStackLayout>
+                <Button Grid.Column="0" Text="Bil" Command="{Binding ViewFilterCommand}" CommandParameter="car" />
+                <Button Grid.Column="1" Text="Lastbil" Command="{Binding ViewFilterCommand}" CommandParameter="truck" />
+                <Button Grid.Column="2" Text="MC" Command="{Binding ViewFilterCommand}" CommandParameter="mc" />
+            </Grid>
+        </Grid>
     </ScrollView>
 
 </ContentPage>

@@ -6,7 +6,6 @@ namespace PRG_MAUI_Car_Register.View
 {
     public partial class MainPage : ContentPage
     {
-        ObservableCollection<Vehicle> filteredList;
         //MainPageViewModel mainPageViewModel = new MainPageViewModel();
 
         public MainPage()
@@ -14,158 +13,13 @@ namespace PRG_MAUI_Car_Register.View
             InitializeComponent();
 
             BindingContext = MainPageViewModel.Instance;
-            pickerType.SelectedIndex = 0;
 
-            filteredList = MainPageViewModel.Instance.VehicleList;
-            CollectionViewVehicles.ItemsSource = filteredList;
 
             //Vehicle vehicle = new Vehicle((Vehicle.Type)(0));
             //vehicle.RegistrationNumber = "ABC 123";
             //vehicle.Manufacturer = "BMW";
             //vehicle.Model = "M4-325";
             //vehicle.YearModel = 2024;
-        }
-
-        private void pickerType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            carFieldsGrid.IsVisible = false;
-            mcFieldsGrid.IsVisible = false;
-            trucksFieldsGrid.IsVisible = false;
-            switch (pickerType.SelectedItem)
-            {
-                case "Bil":
-                    carFieldsGrid.IsVisible = true;
-                    break;
-                case "MC":
-                    mcFieldsGrid.IsVisible = true;
-                    break;
-                case "Lastbil":
-                    trucksFieldsGrid.IsVisible = true;
-                    break;
-            }
-        }
-
-        private void OnRegisterClicked(object sender, EventArgs e)
-        {
-            Vehicle vehicle = null;
-            try
-            {
-                if (!int.TryParse(entryYearModel.Text, out int YearModel))
-                {
-                    throw new ArgumentException("Årsmodell måste anges i enbart siffror.");
-                }
-
-                string selectedItem = pickerType.SelectedItem?.ToString() ?? "";
-
-                switch (selectedItem)
-                {
-                    case "Bil":
-                        if (!int.TryParse(entryDoors.Text, out int Doors))
-                        {
-                            throw new ArgumentException("Dörrar måste anges i enbart siffror.");
-                        }
-
-                        vehicle = new Car(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, Doors);
-                        break;
-
-                    case "MC":
-                        if (!int.TryParse(entryCylinderVolume.Text, out int CylinderVolume))
-                        {
-                            throw new ArgumentException("Cylindervolym måste anges i enbart siffror.");
-                        }
-
-                        vehicle = new MC(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, CylinderVolume);
-                        break;
-
-                    case "Lastbil":
-                        if (!int.TryParse(entryLoadCapacity.Text, out int LoadCapacity))
-                        {
-                            throw new ArgumentException("Lastkapacitet måste anges i enbart siffror.");
-                        }
-
-                        vehicle = new Truck(entryRegistrationNumber.Text, entryManufacturer.Text, entryModel.Text, YearModel, LoadCapacity);
-                        break;
-
-                    default:
-                        throw new ArgumentException($"Ogiltig bil typ: {selectedItem}");
-                }
-
-                if (vehicle == null)
-                {
-                    return;
-                }
-                MainPageViewModel.Instance.VehicleList.Add(vehicle);
-                    
-                ClearTextFields();
-            }
-
-            // här "fångas" eventuella felmeddelanden från Vehicle
-            catch (ArgumentException ex)
-            {
-                DisplayAlert("Fel", ex.Message, "OK");
-            }
-        }
-
-        private void OnRadioCheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            if (e.Value != true) return;
-
-            RadioButton radioButton = (RadioButton)sender;
-
-            // Skapa en temporär filtrerad lista baserat på vilken radioknapp som är vald
-            IEnumerable<Vehicle> filteredList;
-
-            switch (radioButton.Content)
-            {
-                case "Bil":
-                    filteredList = MainPageViewModel.Instance.VehicleList.Where(v => v is Car).ToList();
-                    break;
-                case "MC":
-                    filteredList = MainPageViewModel.Instance.VehicleList.Where(v => v is MC).ToList();
-                    break;
-                case "Lastbil":
-                    filteredList = MainPageViewModel.Instance.VehicleList.Where(v => v is Truck).ToList();
-                    break;
-                default:
-                    filteredList = MainPageViewModel.Instance.VehicleList;
-                    break;
-            }
-
-            CollectionViewVehicles.ItemsSource = filteredList;
-        }
-
-        private void OnSearchClicked(object sender, EventArgs e)
-        {
-            string searchTerm = entrySearchRegistrationNumber.Text?.ToLower();
-
-            if (string.IsNullOrEmpty(searchTerm))
-            {
-                entrySearchRegistrationNumber.Text = "Ange ett registreringsnummer för att söka.";
-                return;
-            }
-
-            Vehicle foundVehicle = MainPageViewModel.Instance.VehicleList.FirstOrDefault(v => v.RegistrationNumber?.ToLower() == searchTerm);
-
-            if (foundVehicle != null)
-            {
-                labelSearchResult.Text = $"Fordon hittat:\n" +
-                                         $"{foundVehicle.GetDescription()}";
-            }
-            else
-            {
-                labelSearchResult.Text = "Inget fordon hittades med det registreringsnumret.";
-            }
-        }
-
-        private void ClearTextFields()
-        {
-            entryRegistrationNumber.Text = string.Empty;
-            entryManufacturer.Text = string.Empty;
-            entryModel.Text = string.Empty;
-            entryYearModel.Text = string.Empty;
-            entryDoors.Text = string.Empty;
-            entryLoadCapacity.Text = string.Empty;
-            entryCylinderVolume.Text = string.Empty;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace PRG_MAUI_Car_Register.ViewModel
 
         public RegisterNewCarViewModel()
         {
-            RegisterCommand = new Command(() =>
+            RegisterCommand = new Command(async () =>
             {
                 try
                 {
@@ -34,7 +34,7 @@ namespace PRG_MAUI_Car_Register.ViewModel
                 }
                 catch (ArgumentException ex)
                 {
-
+                    await Shell.Current.DisplayAlert("Fel", ex.Message, "OK");
                 }
             });
 

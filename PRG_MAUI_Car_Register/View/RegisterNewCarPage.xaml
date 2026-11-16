@@ -4,7 +4,7 @@
              x:Class="PRG_MAUI_Car_Register.View.RegisterNewCarPage"
              Title="RegisterNewCar">
     <ScrollView>
-        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"  RowSpacing="10" Margin="10">
+        <Grid Padding="20" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"  RowSpacing="10">
             <Button HorizontalOptions="Start" Grid.Row="0" WidthRequest="100" Text="Gå Tillbaka" Command="{Binding GoBackCommand}" />
 
             <Label
