@@ -19,4 +19,9 @@
      Route="CarsPage" />
     </TabBar>
 
+
+    <ShellContent
+     Title="Bilregistrering"
+     ContentTemplate="{DataTemplate local:RegisterNewCarPage}"
+     Route="RegisterNewCarPage" />
 </Shell>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PRG_MAUI_Car_Register.View.RegisterNewCarPage"
+             Title="RegisterNewCar">
+    <ScrollView>
+        <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"  RowSpacing="10" Margin="10">
+            <Button HorizontalOptions="Start" Grid.Row="0" WidthRequest="100" Text="Gå Tillbaka" Command="{Binding GoBackCommand}" />
+
+            <Label
+                Grid.Row="1"
+                Text="Välkommen till Bilregistreringen!"
+                Style="{StaticResource SubHeadline}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+            <Entry Grid.Row="2" x:Name="entryRegistrationNumber" Text="{Binding RegistrationNumber}" Placeholder="Registreringsnummer" TextTransform="Uppercase" ReturnType="Next" />
+            <Entry Grid.Row="3" Text="{Binding Manufacturer}" Placeholder="Tillverkare" ReturnType="Next" />
+            <Entry Grid.Row="4" Text="{Binding Model}" Placeholder="Modell" ReturnType="Next" />
+            <Entry Grid.Row="5"  Text="{Binding YearModel}" Placeholder="Årsmodell" Keyboard="Numeric" ReturnType="Next" />
+
+            <Entry Grid.Row="6" Text="{Binding Doors}" Placeholder="Antal dörrar" ReturnType="Next" />
+            <Button Grid.Row="7" Text="Registrera" Command="{Binding RegisterCommand}" Margin="0,0,0,20"/>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>
