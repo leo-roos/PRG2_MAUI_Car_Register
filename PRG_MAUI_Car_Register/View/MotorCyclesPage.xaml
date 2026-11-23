@@ -3,10 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PRG_MAUI_Car_Register.View.MotorCyclesPage"
              Title="MotorCyclesPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
+    <ScrollView>
+        <Grid Padding="20" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, 300, Auto, Auto" RowSpacing="10">
+            <Button HorizontalOptions="Start" Grid.Row="0" WidthRequest="100" Text="Gå Tillbaka" Command="{Binding GoBackCommand}" />
+            <Label 
+            Grid.Row="1"
+            Text="Välkommen till motorcykel sidan!" 
+            Style="{StaticResource SubHeadline}"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+            <Label Grid.Row="2" Text="Registrera en ny motorcykel?" />
+            <Button Grid.Row="3" Text="Registrera en ny motorcykel" Command="{Binding RegisterNewVehicleCommand}" Margin="0, 0, 0, 20" />
+
+            <Label Grid.Row="4" Text="Söka efter motorcyklar?" />
+            <Grid Grid.Row="5" RowDefinitions="*" ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                <Entry Text="{Binding SearchFilter}" Placeholder="ABC123" ReturnType="Next" />
+                <Button Grid.Column="1" Text="Sök" Command="{Binding SearchCommand}" />
+            </Grid>
+            <CollectionView Grid.Row="6" ItemsSource="{Binding MotorCyclesList}"
+                SelectionMode="Single"
+                SelectedItem="{Binding SelectedItem}"
+                SelectionChangedCommand="{Binding ChooseVehicleCommand}"
+            >
+                <CollectionView.Header>
+                    <Grid ColumnDefinitions="100,*,*,100,150" ColumnSpacing="10" Padding="5">
+                        <Label Grid.Column="0" Text="Reg.nr"/>
+                        <Label Grid.Column="1" Text="Tillverkare"/>
+                        <Label Grid.Column="2" Text="Modell"/>
+                        <Label Grid.Column="3" Text="Årsmodell"/>
+                        <Label Grid.Column="4" Text="Cylindervolym (CC)"/>
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="100,*,*,100,150" ColumnSpacing="10" Padding="5">
+                            <Label Grid.Column="0" Text="{Binding RegistrationNumber}"/>
+                            <Label Grid.Column="1" Text="{Binding Manufacturer}"/>
+                            <Label Grid.Column="2" Text="{Binding Model}"/>
+                            <Label Grid.Column="3" Text="{Binding YearModel}"/>
+                            <Label Grid.Column="4" Text="{Binding CylinderVolume}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Grid.Row="7" Text="Vald motorcykel:" />
+            <Label Grid.Row="8" Text="{Binding ChosenVehicleDetails}" />
+        </Grid>
+    </ScrollView>
 </ContentPage>

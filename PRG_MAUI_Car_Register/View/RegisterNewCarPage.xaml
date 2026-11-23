@@ -24,7 +24,7 @@
             <Entry Grid.Row="7" Text="{Binding Model}" Placeholder="i5 Touring G51" ReturnType="Next" />
 
             <Label Grid.Row="8" Text="Årsmodell" />
-            <Entry Grid.Row="9"  Text="{Binding YearModel}" Placeholder="2027" Keyboard="Numeric" ReturnType="Next" />
+            <Entry Grid.Row="9"  Text="{Binding YearModel}" Placeholder="2026" Keyboard="Numeric" ReturnType="Next" />
 
             <Label Grid.Row="10" Text="Antal dörrar" />
             <Entry Grid.Row="11" Text="{Binding Doors}" Placeholder="4" ReturnType="Next" />

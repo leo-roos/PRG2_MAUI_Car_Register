@@ -16,8 +16,6 @@
      Title="Bilar"
      ContentTemplate="{DataTemplate local:CarsPage}"
      Route="CarsPage" />
-
-
     <ShellContent
      Title="Bilregistrering"
      ContentTemplate="{DataTemplate local:RegisterNewCarPage}"
@@ -32,4 +30,13 @@
      Title="Lastbils-registrering"
      ContentTemplate="{DataTemplate local:RegisterNewTruckPage}"
      Route="RegisterNewTruckPage" />
+
+    <ShellContent
+     Title="Motorcyklar"
+     ContentTemplate="{DataTemplate local:MotorCyclesPage}"
+     Route="MotorCyclesPage" />
+    <ShellContent
+     Title="Motorcykel-registrering"
+     ContentTemplate="{DataTemplate local:RegisterNewMotorCyclePage}"
+     Route="RegisterNewMotorCyclePage" />
 </Shell>
