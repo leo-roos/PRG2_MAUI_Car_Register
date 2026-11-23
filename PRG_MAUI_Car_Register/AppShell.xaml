@@ -8,8 +8,35 @@
     Title="PRG_MAUI_Car_Register">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+     Title="Home"
+     ContentTemplate="{DataTemplate local:MainPage}"
+     Route="MainPage" />
 
+    <ShellContent
+     Title="Bilar"
+     ContentTemplate="{DataTemplate local:CarsPage}"
+     Route="CarsPage" />
+    <ShellContent
+     Title="Bilregistrering"
+     ContentTemplate="{DataTemplate local:RegisterNewCarPage}"
+     Route="RegisterNewCarPage" />
+
+
+    <ShellContent
+     Title="Lastbilar"
+     ContentTemplate="{DataTemplate local:TrucksPage}"
+     Route="TrucksPage" />
+    <ShellContent
+     Title="Lastbils-registrering"
+     ContentTemplate="{DataTemplate local:RegisterNewTruckPage}"
+     Route="RegisterNewTruckPage" />
+
+    <ShellContent
+     Title="Motorcyklar"
+     ContentTemplate="{DataTemplate local:MotorCyclesPage}"
+     Route="MotorCyclesPage" />
+    <ShellContent
+     Title="Motorcykel-registrering"
+     ContentTemplate="{DataTemplate local:RegisterNewMotorCyclePage}"
+     Route="RegisterNewMotorCyclePage" />
 </Shell>

@@ -5,8 +5,12 @@
         private int doors;
         public Car(string registrationNumber, string manufacturer, string model, int yearModel, int doors) : base(registrationNumber, manufacturer, model, yearModel)
         {
-            VehicleType = "Bil";
             Doors = doors;
+        }
+
+        public override string GetDescription()
+        {
+            return $"Bil - {Manufacturer} {Model} ({YearModel}), Reg: {RegistrationNumber}, Antal dörrar: {Doors}";
         }
 
         public int Doors
@@ -20,11 +24,6 @@
                 }
                 doors = value;
             }
-        }
-
-        public override string GetDescription()
-        {
-            return $"{VehicleType} - {Manufacturer} {Model} ({YearModel}), Reg: {RegistrationNumber}, Doors: {Doors}";
         }
     }
 }

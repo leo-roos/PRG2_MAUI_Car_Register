@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PRG_MAUI_Car_Register.View.RegisterNewCarPage"
+             Title="RegisterNewCar">
+    <ScrollView>
+        <Grid Padding="20" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"  RowSpacing="10">
+            <Button HorizontalOptions="Start" Grid.Row="0" WidthRequest="100" Text="Gå Tillbaka" Command="{Binding GoBackCommand}" />
+
+            <Label
+                Grid.Row="1"
+                Text="Välkommen till Bilregistreringen!"
+                Style="{StaticResource SubHeadline}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+            <Label Grid.Row="2" Text="Registreringsnummer" />
+            <Entry Grid.Row="3" Text="{Binding RegistrationNumber}" Placeholder="ABC123" TextTransform="Uppercase" ReturnType="Next" />
+
+            <Label Grid.Row="4" Text="Tillverkare" />
+            <Entry Grid.Row="5" Text="{Binding Manufacturer}" Placeholder="BMW" ReturnType="Next" />
+
+            <Label Grid.Row="6" Text="Modell" />
+            <Entry Grid.Row="7" Text="{Binding Model}" Placeholder="i5 Touring G51" ReturnType="Next" />
+
+            <Label Grid.Row="8" Text="Årsmodell" />
+            <Entry Grid.Row="9"  Text="{Binding YearModel}" Placeholder="2026" Keyboard="Numeric" ReturnType="Next" />
+
+            <Label Grid.Row="10" Text="Antal dörrar" />
+            <Entry Grid.Row="11" Text="{Binding Doors}" Placeholder="4" ReturnType="Next" />
+
+            <Button Grid.Row="12" Text="Registrera" Command="{Binding RegisterCommand}" Margin="0,0,0,20"/>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

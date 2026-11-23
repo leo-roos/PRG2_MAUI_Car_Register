@@ -4,16 +4,14 @@ using System.Text.RegularExpressions;
 
 namespace PRG_MAUI_Car_Register.Model
 {
-    abstract class Vehicle
+    abstract public class Vehicle
     {
-        private string vehicleType = string.Empty;
         private string registrationNumber = string.Empty;
         private string manufacturer = string.Empty;
         private string model = string.Empty;
         private string yearModel = string.Empty;
 
-        // Konstruktor (en metod med samma namn som klassen, som returnerar ett objekt)
-        public Vehicle(string registrationNumber, string manufacturer, string model, int yearModel) // en konstruktor kan, men måste inte, ta parametrar
+        public Vehicle(string registrationNumber, string manufacturer, string model, int yearModel)
         {
             RegistrationNumber = registrationNumber;
             Manufacturer = manufacturer;
@@ -21,14 +19,24 @@ namespace PRG_MAUI_Car_Register.Model
             YearModel = yearModel;
         }
 
-        // Fordonstyp tas in från dropdown-menyn, och behöver därför inte valideras
-        public string VehicleType
+        private bool IsValidLetter(char c)
         {
-            get { return vehicleType; }
-            set { this.vehicleType = value; }
+            if (!char.IsLetter(c) || c == 'Ö' || c == 'Ä' || c == 'Å')
+            {
+                return false;
+            }
+            return true;
         }
 
-        // Get-Set för att hålla variablerna privata, och för att validera inkommande värden från UI (user interface, användargränssnittet)
+        private bool IsValidLetterOrDigit(char c)
+        {
+            if (!char.IsLetterOrDigit(c) || c == 'Ö' || c == 'Ä' || c == 'Å')
+            {
+                return false;
+            }
+            return true;
+        }
+
         public string RegistrationNumber
         {
             get { return registrationNumber; }
@@ -44,23 +52,48 @@ namespace PRG_MAUI_Car_Register.Model
                     throw new ArgumentException("Ett registreringsnummer måste bestå av exakt 6 tecken, med tre bokstäver följt av två siffror och en siffra eller bokstav.");
                 }
 
-                bool isValid = Regex.IsMatch(value, "^[A-ZÅÄÖ]{3}[0-9]{2}[0-9]|[A-ZÅÄÖ]$");
-                Debug.WriteLine(isValid);
+                bool isValid = true;
+                char[] chars = value.ToCharArray();
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    char c = chars[i];
+                    if (i <= 2)
+                    {
+                        if (!IsValidLetter(c))
+                        {
+                            isValid = false;
+                        }
+                    }
+                    else if (i <= 4)
+                    {
+                        if (!char.IsDigit(c))
+                        {
+                            isValid = false;
+                        }
+                    }
+                    else if (i == 5)
+                    {
+                        if (!IsValidLetterOrDigit(c))
+                        {
+                            isValid = false;
+                        }
+                    }
+                }
 
                 if (!isValid)
                 {
-                    throw new ArgumentException("Fel format, formattering måste vara antingen: ABC123, eller: ABC12D");
+                    throw new ArgumentException("Fel format för registreringsnummret, formattering måste vara antingen: ABC123, eller: ABC12D");
                 }
 
                 registrationNumber = value.ToUpper();
             }
         }
 
-        //TODO Tillverkare ska valideras, sparas i objektet och visas i UI
         public string Model
         {
             get { return model; }
-            set {
+            set
+            {
                 if (String.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("En bil modell måste bestå av bokstäver, det kan inte vara tomt.");
@@ -77,11 +110,11 @@ namespace PRG_MAUI_Car_Register.Model
             }
         }
 
-        //TODO Modell ska valideras, sparas i objektet och visas i UI
         public string Manufacturer
         {
             get { return manufacturer; }
-            set {
+            set
+            {
                 if (String.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException("En bils märke måste bestå av bokstäver, det kan inte vara tomt.");
@@ -104,7 +137,7 @@ namespace PRG_MAUI_Car_Register.Model
             {
                 if (int.TryParse(this.yearModel, out int result))
                     return result;
-                return 0; // or throw new InvalidOperationException("YearModel not set or invalid");
+                return 0;
             }
             set
             {
@@ -129,11 +162,6 @@ namespace PRG_MAUI_Car_Register.Model
                 this.yearModel = stringValue;
             }
         }
-
-        //TODO Lägg till möjligheten att spara realistisk årsmodell, validera, spara och visa i objektet och visas i UI. Tips: Regex.IsMatch()
-
-
-        //TODO Modifiera overriden på ToString() så att allt visas som önskat i UIs listBox
 
         public abstract string GetDescription();
     }

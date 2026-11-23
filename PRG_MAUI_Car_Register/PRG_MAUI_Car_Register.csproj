@@ -62,4 +62,43 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.9" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Compile Update="View\MotorCyclesPage.xaml.cs">
+	    <DependentUpon>MotorCyclesPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\RegisterNewMotorCyclePage.xaml.cs">
+	    <DependentUpon>RegisterNewMotorCyclePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\TrucksPAge.xaml.cs">
+	    <DependentUpon>TrucksPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\RegisterNewTruckPage.xaml.cs">
+	    <DependentUpon>RegisterNewTruckPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="View\RegisterNewCarPage.xaml.cs">
+	    <DependentUpon>RegisterNewCarPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="View\MotorCyclesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\RegisterNewMotorCyclePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\TrucksPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\CarsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\RegisterNewTruckPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\RegisterNewCarPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>
