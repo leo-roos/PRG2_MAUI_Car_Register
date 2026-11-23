@@ -19,6 +19,24 @@ namespace PRG_MAUI_Car_Register.Model
             YearModel = yearModel;
         }
 
+        private bool IsValidLetter(char c)
+        {
+            if (!char.IsLetter(c) || c == 'Ö' || c == 'Ä' || c == 'Å')
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsValidLetterOrDigit(char c)
+        {
+            if (!char.IsLetterOrDigit(c) || c == 'Ö' || c == 'Ä' || c == 'Å')
+            {
+                return false;
+            }
+            return true;
+        }
+
         public string RegistrationNumber
         {
             get { return registrationNumber; }
@@ -41,7 +59,7 @@ namespace PRG_MAUI_Car_Register.Model
                     char c = chars[i];
                     if (i <= 2)
                     {
-                        if (!char.IsLetter(c))
+                        if (!IsValidLetter(c))
                         {
                             isValid = false;
                         }
@@ -55,7 +73,7 @@ namespace PRG_MAUI_Car_Register.Model
                     }
                     else if (i == 5)
                     {
-                        if (!char.IsLetterOrDigit(c))
+                        if (!IsValidLetterOrDigit(c))
                         {
                             isValid = false;
                         }
