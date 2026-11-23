@@ -22,4 +22,14 @@
      Title="Bilregistrering"
      ContentTemplate="{DataTemplate local:RegisterNewCarPage}"
      Route="RegisterNewCarPage" />
+
+
+    <ShellContent
+     Title="Lastbilar"
+     ContentTemplate="{DataTemplate local:TrucksPage}"
+     Route="TrucksPage" />
+    <ShellContent
+     Title="Lastbils-registrering"
+     ContentTemplate="{DataTemplate local:RegisterNewTruckPage}"
+     Route="RegisterNewTruckPage" />
 </Shell>
