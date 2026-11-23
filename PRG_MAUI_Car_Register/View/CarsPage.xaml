@@ -27,20 +27,22 @@
                 SelectionChangedCommand="{Binding ChooseVehicleCommand}"
             >
                 <CollectionView.Header>
-                    <Grid ColumnDefinitions="100,*,*,100" ColumnSpacing="10" Padding="5">
+                    <Grid ColumnDefinitions="100,*,*,100,100" ColumnSpacing="10" Padding="5">
                         <Label Grid.Column="0" Text="Reg.nr"/>
                         <Label Grid.Column="1" Text="Tillverkare"/>
                         <Label Grid.Column="2" Text="Modell"/>
                         <Label Grid.Column="3" Text="Årsmodell"/>
+                        <Label Grid.Column="4" Text="Dörrar"/>
                     </Grid>
                 </CollectionView.Header>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="100,*,*,100" ColumnSpacing="10" Padding="5">
+                        <Grid ColumnDefinitions="100,*,*,100,100" ColumnSpacing="10" Padding="5">
                             <Label Grid.Column="0" Text="{Binding RegistrationNumber}"/>
                             <Label Grid.Column="1" Text="{Binding Manufacturer}"/>
                             <Label Grid.Column="2" Text="{Binding Model}"/>
                             <Label Grid.Column="3" Text="{Binding YearModel}"/>
+                            <Label Grid.Column="4" Text="{Binding Doors}"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
