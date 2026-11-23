@@ -33,8 +33,10 @@ namespace PRG_MAUI_Car_Register.ViewModel
             VehicleList.Add(new Car("ABC136", "BMW", "M5", 2026, 4));
             VehicleList.Add(new Car("ABC137", "BMW", "M5", 2026, 4));
             VehicleList.Add(new Car("ABC138", "BMW", "M5", 2026, 4));
-            VehicleList.Add(new Car("ABC139", "BMW", "M5", 2026, 4));
-            VehicleList.Add(new Car("ABC130", "BMW", "M5", 2026, 4));
+            VehicleList.Add(new Truck("ABC139", "Volvo", "FH 500", 2026, 15000));
+            VehicleList.Add(new Truck("ABC130", "Volvo", "FH 500", 2026, 15000));
+            VehicleList.Add(new MC("ABC141", "Yamaha", "MT-07", 2026, 700));
+            VehicleList.Add(new MC("ABC142", "Yamaha", "MT-07", 2026, 700));
 
             ViewFilterCommand = new Command<string>(async (type) =>
             {
