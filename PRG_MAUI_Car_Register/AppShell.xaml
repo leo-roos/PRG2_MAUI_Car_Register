@@ -4,39 +4,64 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PRG_MAUI_Car_Register.View"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
     Title="PRG_MAUI_Car_Register">
 
-    <ShellContent
-     Title="Home"
-     ContentTemplate="{DataTemplate local:MainPage}"
-     Route="MainPage" />
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="75" Margin="0, 0, 0, 10">
+            <Label Text="Biluthyrning" 
+                TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" 
+                FontSize="24" 
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="*" 
+                  Padding="15, 10">
+                <Label Grid.Column="0"
+                       Text="{Binding Title}"
+                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
 
     <ShellContent
-     Title="Bilar"
-     ContentTemplate="{DataTemplate local:CarsPage}"
-     Route="CarsPage" />
+         Title="Home"
+         ContentTemplate="{DataTemplate local:MainPage}"
+         Route="MainPage" />
+
     <ShellContent
-     Title="Bilregistrering"
-     ContentTemplate="{DataTemplate local:RegisterNewCarPage}"
-     Route="RegisterNewCarPage" />
+         Title="Bilar"
+         ContentTemplate="{DataTemplate local:CarsPage}"
+         Route="CarsPage" />
+    <ShellContent
+         Title="Bilregistrering"
+         ContentTemplate="{DataTemplate local:RegisterNewCarPage}"
+         Route="RegisterNewCarPage" />
 
 
     <ShellContent
-     Title="Lastbilar"
-     ContentTemplate="{DataTemplate local:TrucksPage}"
-     Route="TrucksPage" />
+         Title="Lastbilar"
+         ContentTemplate="{DataTemplate local:TrucksPage}"
+         Route="TrucksPage" />
     <ShellContent
-     Title="Lastbils-registrering"
-     ContentTemplate="{DataTemplate local:RegisterNewTruckPage}"
-     Route="RegisterNewTruckPage" />
+         Title="Lastbils-registrering"
+         ContentTemplate="{DataTemplate local:RegisterNewTruckPage}"
+         Route="RegisterNewTruckPage" />
 
     <ShellContent
-     Title="Motorcyklar"
-     ContentTemplate="{DataTemplate local:MotorCyclesPage}"
-     Route="MotorCyclesPage" />
+         Title="Motorcyklar"
+         ContentTemplate="{DataTemplate local:MotorCyclesPage}"
+         Route="MotorCyclesPage" />
     <ShellContent
-     Title="Motorcykel-registrering"
-     ContentTemplate="{DataTemplate local:RegisterNewMotorCyclePage}"
-     Route="RegisterNewMotorCyclePage" />
+         Title="Motorcykel-registrering"
+         ContentTemplate="{DataTemplate local:RegisterNewMotorCyclePage}"
+         Route="RegisterNewMotorCyclePage" />
 </Shell>
