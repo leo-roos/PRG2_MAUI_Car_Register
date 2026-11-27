@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PRG_MAUI_Car_Register.View.LoginPage"
+             Title="LoginPage">
+    <ScrollView>
+        <Grid Padding="20" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, 300, Auto, Auto" RowSpacing="10">
+            <Label 
+                Grid.Row="0"
+                Text="Välkommen till inloggningen!" 
+                Style="{StaticResource SubHeadline}"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+            <Label 
+                Grid.Row="1"
+                Text="Användarnamn" />
+            <Entry Grid.Row="2" Text="{Binding UserName}" Placeholder="admin" ReturnType="Next" />
+
+            <Label 
+                Grid.Row="3"
+                Text="Lösenord" />
+            <Entry Grid.Row="4" Text="{Binding Password}" Placeholder="123" Keyboard="Password" ReturnType="Next" />
+
+            <Button Grid.Row="5" Text="Logga in" Command="{Binding LoginCommand}" />
+        </Grid>
+    </ScrollView>
+</ContentPage>

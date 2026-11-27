@@ -33,6 +33,11 @@
     </Shell.ItemTemplate>
 
     <ShellContent
+         Title="Login"
+         ContentTemplate="{DataTemplate local:LoginPage}"
+         Route="LoginPage" FlyoutItemIsVisible="False" />
+    
+    <ShellContent
          Title="Home"
          ContentTemplate="{DataTemplate local:MainPage}"
          Route="MainPage" />
